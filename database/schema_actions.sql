@@ -1,3 +1,4 @@
+-- Trigger checking if the year of the race matches the season year
 CREATE OR REPLACE TRIGGER trg_race_date_season_match
 BEFORE INSERT OR UPDATE ON races
 FOR EACH ROW
@@ -14,6 +15,7 @@ BEGIN
 END;
 /
 
+-- Trigger checking if a result is being added for a race that did not happen yet
 CREATE OR REPLACE TRIGGER trg_check_race_date_valid
 BEFORE INSERT OR UPDATE ON races_results
 FOR EACH ROW
@@ -30,6 +32,7 @@ BEGIN
 END;
 /
 
+-- Function calculating driver's age at a certain race
 CREATE OR REPLACE FUNCTION fn_get_driver_age_at_race(
     p_driver_id IN NUMBER,
     p_race_id IN NUMBER
@@ -51,6 +54,7 @@ EXCEPTION
 END;
 /
 
+-- Function calculating total points in a given season for a team
 CREATE OR REPLACE FUNCTION fn_get_team_season_points(
     p_team_id IN NUMBER,
     p_season_id IN NUMBER
@@ -68,6 +72,7 @@ BEGIN
 END;
 /
 
+-- Procedure generating general standings for a given season
 CREATE OR REPLACE PROCEDURE pr_generate_standings(p_season_id IN NUMBER) IS
     CURSOR c_standings IS
         SELECT d.name || ' ' || d.surname AS full_name,
@@ -103,6 +108,7 @@ EXCEPTION
 END;
 /
 
+-- Procedure which allows adding a race result
 CREATE OR REPLACE PROCEDURE pr_add_race_result(
     p_race_id IN NUMBER,
     p_driver_id IN NUMBER,
