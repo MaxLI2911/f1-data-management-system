@@ -1,9 +1,7 @@
-import DAO.RaceDAO;
-import DAO.TeamDAO;
-import DAO.DriverDAO;
-import DAO.SeasonDAO;
-import model.Team;
-import model.Driver;
+import dao.RaceDAO;
+import dao.TeamDAO;
+import dao.DriverDAO;
+import dao.SeasonDAO;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

@@ -1,35 +1,35 @@
-package DAO;
+package dao;
 
 import config.DatabaseConfig;
-import model.Team;
+import model.Season;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TeamDAO {
-    public List<Team> getAllTeams() {
-        List<Team> teams = new ArrayList<>();
-        String sql = "SELECT team_id, name, engine_suplier, principal FROM teams";
+public class SeasonDAO {
+    public List<Season> getAllSeasons() {
+        List<Season> seasons = new ArrayList<>();
+        String sql = "SELECT season_id, year, description FROM seasons ORDER BY year DESC";
 
         try (Connection conn = DatabaseConfig.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                teams.add(new Team(
-                        rs.getInt("team_id"),
-                        rs.getString("name"),
-                        rs.getString("engine_suplier"),
-                        rs.getString("principal")
+                seasons.add(new Season(
+                        rs.getInt("season_id"),
+                        rs.getInt("year"),
+                        rs.getString("description")
                 ));
             }
         } catch (SQLException e) {
-            System.err.println("Error " + e.getMessage());
+            System.err.println("Error fetching seasons: " + e.getMessage());
         }
-        return teams;
+        return seasons;
     }
+
     public boolean exists(int id) {
-        String sql = "SELECT 1 FROM teams WHERE team_id = ?"; //
+        String sql = "SELECT 1 FROM seasons WHERE season_id = ?"; //
         try (Connection conn = DatabaseConfig.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, id);
