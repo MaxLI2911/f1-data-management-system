@@ -29,6 +29,7 @@ Projekt to relacyjna baza danych pozwalająca na zarządzanie sezonem wyścigowy
 
 ```
 cd java
+mvn clean compile
 mvn exec:java -Dexec.mainClass="Main"
 ```
 
