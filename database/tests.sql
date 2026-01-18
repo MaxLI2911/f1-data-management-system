@@ -7,7 +7,7 @@ DECLARE
     v_new_race_id NUMBER;
     v_future_season_id NUMBER;
 BEGIN
-    DBMS_OUTPUT.PUT_LINE('--- REPORT 1: Driver Performance Analysis');
+    DBMS_OUTPUT.PUT_LINE('--- Driver Performance Analysis');
     -- Joins 4 tables: drivers, qualifying, results, and teams to calculate "Positions Gained"
     FOR r IN (
         SELECT 
@@ -28,7 +28,7 @@ BEGIN
                              ' | Gained: ' || r.positions_gained);
     END LOOP;
 
-    DBMS_OUTPUT.PUT_LINE(CHR(10) || '--- REPORT 2: Engine Supplier Standings) ---');
+    DBMS_OUTPUT.PUT_LINE(CHR(10) || '--- Engine Supplier Standings) ---');
     -- Aggregates points by engine supplier using JOIN and GROUP BY
     FOR r IN (
         SELECT 
@@ -44,7 +44,7 @@ BEGIN
                              ' | Total Pts: ' || r.total_points);
     END LOOP;
 
-    DBMS_OUTPUT.PUT_LINE(CHR(10) || '--- SECTION 2: FUNCTION and PROCEDURE TESTING');
+    DBMS_OUTPUT.PUT_LINE(CHR(10) || 'FUNCTION and PROCEDURE TESTING');
     
     -- Test fn_get_driver_age_at_race for Max Verstappen (119)
     v_test_age := fn_get_driver_age_at_race(119, 101);
@@ -58,7 +58,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('3. Procedure Test (Full Standings):');
     pr_generate_standings(76);
 
-    DBMS_OUTPUT.PUT_LINE(CHR(10) || '--- SECTION 3: TRIGGER and VALIDATION TESTS');
+    DBMS_OUTPUT.PUT_LINE(CHR(10) || 'TRIGGER and VALIDATION TESTS');
 
     -- Test: trg_race_date_season_match (Year Mismatch)
     DBMS_OUTPUT.PUT_LINE('4. Testing Race/Season Year Match Trigger:');
